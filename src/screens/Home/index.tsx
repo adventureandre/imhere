@@ -1,8 +1,13 @@
 import React from "react";
 import {Text, TextInput, TouchableOpacity, View} from "react-native";
 import {styles} from "./styles";
+import { Participant } from "../../components/Participant";
 
 export function Home() {
+   const handleParticipantAdd = ()=>{
+       console.log("Voce clicou no botao de Adicionar");
+   }
+
     return (
         <View style={styles.conteiner}>
             <Text style={styles.eventName}>
@@ -13,16 +18,19 @@ export function Home() {
                 Sexta, 4 de Novembro de 2022
             </Text>
 
+            <View style={styles.form}>
             <TextInput
                 style={styles.input}
                 placeholder="Digite algo"
                 placeholderTextColor="#6B6B6B"
             />
-            <TouchableOpacity style={styles.button} >
+            <TouchableOpacity style={styles.button} onPress={ handleParticipantAdd } >
                <Text style={styles.buttonText}>
-                   Clique aki
+                   +
                </Text>
             </TouchableOpacity>
+            </View>
+            <Participant/>
         </View>
 
 
