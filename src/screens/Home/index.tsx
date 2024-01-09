@@ -1,12 +1,19 @@
 import React from "react";
-import {Text, TextInput, TouchableOpacity, View} from "react-native";
-import {styles} from "./styles";
+import { ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { styles } from "./styles";
 import { Participant } from "../../components/Participant";
 
 export function Home() {
-   const handleParticipantAdd = ()=>{
-       console.log("Voce clicou no botao de Adicionar");
-   }
+
+    const participantes = ["andre", "milena", "joao", "maria", "andre", "milena", "joao", "maria", "andre", "milena", "joao", "maria"]
+
+    const handleParticipantAdd = () => {
+        console.log("Voce clicou no botao de Adicionar");
+    }
+
+    function handleParticipantRemove(name: string) {
+        console.log(`"Você quer remover ${name}"`);
+    }
 
     return (
         <View style={styles.conteiner}>
@@ -19,22 +26,27 @@ export function Home() {
             </Text>
 
             <View style={styles.form}>
-            <TextInput
-                style={styles.input}
-                placeholder="Digite algo"
-                placeholderTextColor="#6B6B6B"
-            />
-            <TouchableOpacity style={styles.button} onPress={ handleParticipantAdd } >
-               <Text style={styles.buttonText}>
-                   +
-               </Text>
-            </TouchableOpacity>
+                <TextInput
+                    style={styles.input}
+                    placeholder="Digite algo"
+                    placeholderTextColor="#6B6B6B"
+                />
+                <TouchableOpacity style={styles.button} onPress={handleParticipantAdd} >
+                    <Text style={styles.buttonText}>
+                        +
+                    </Text>
+                </TouchableOpacity>
             </View>
+            <ScrollView showsVerticalScrollIndicator={false}>
+                {
+                    participantes.map((participante, index) => (
+                        <Participant key={index} name={participante} onRemove={() => handleParticipantRemove(participante)} />
+                    ))
+                }
+            </ScrollView>
 
 
-            <Participant/>
-            <Participant/>
-            <Participant/>
+
         </View>
 
 
