@@ -8,10 +8,13 @@ export const styles =  StyleSheet.create({
         borderRadius:5,
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'center',
+        marginBottom: 10
     },
     name:{
+        flex:1,
+        fontSize:16,
        color : '#FFFFFF',
+       marginLeft:16,
 
     },
     buttonText: {

@@ -30,6 +30,10 @@ export function Home() {
                </Text>
             </TouchableOpacity>
             </View>
+
+
+            <Participant/>
+            <Participant/>
             <Participant/>
         </View>
 
