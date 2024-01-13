@@ -1,32 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 import { Alert, FlatList, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { styles } from "./styles";
 import { Participant } from "../../components/Participant";
 
 export function Home() {
 
-    const participantes = ["andre", "milena", "joao", "maria"]
+    const [participants,setParticipants]=useState<string[]>([])
+    const [participantsName,setParticipantsName]=useState('')
 
     const handleParticipantAdd = () => {
-        if (participantes.includes("andre")) {
+        if (participants.includes(participantsName)) {
             return Alert.alert("Participante Existe", "Já existe um participante na lista com esse nome!")
         }
 
-        console.log("Voce clicou no botao de Adicionar");
+       setParticipants(prevState => [...prevState, participantsName] )
+       setParticipantsName('')
+
     }
 
     function handleParticipantRemove(name: string) {
-        Alert.alert("Remover", `Remover o participante ${name}?`,[
+
+
+
+
+        Alert.alert("Remover", `Remover o participante ${name}?`, [
             {
-                text:'Sim',
-                onPress:()=>Alert.alert("Deletado")
+                text: 'Sim',
+                onPress: () => {
+                    setParticipants(prevState => prevState.filter(participant => participant !== name));    
+                    Alert.alert("Deletado");
+                }
+
             },
             {
-                text:'Não',
+                text: 'Não',
                 style: 'cancel',
             }
         ])
-        
+
     }
 
     return (
@@ -44,6 +55,9 @@ export function Home() {
                     style={styles.input}
                     placeholder="Digite algo"
                     placeholderTextColor="#6B6B6B"
+                    onChangeText={setParticipantsName}
+                    value={participantsName}
+                    
                 />
                 <TouchableOpacity style={styles.button} onPress={handleParticipantAdd} >
                     <Text style={styles.buttonText}>
@@ -53,7 +67,7 @@ export function Home() {
             </View>
 
             <FlatList
-                data={participantes}
+                data={participants}
                 keyExtractor={item => item}
                 renderItem={
                     ({ item }) => (
